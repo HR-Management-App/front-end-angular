@@ -1,0 +1,90 @@
+<h2>Forms</h2>
+
+<!-- Reactive Forms -->
+<!-- Bind formGroup to form and formControlName to controls in Reactive Forms -->
+<form [formGroup]="fBuilder">
+    <h4>Full Name</h4>
+    <div>
+        <label>First Name</label>
+        <input type="text" placeholder="First Name" formControlName="first_name">
+    </div>
+    <div>
+        <label>Middle Name</label>
+        <input type="text" placeholder="Middle Name" formControlName="middle_name">
+    </div>
+    <div>
+        <label>Last Name</label>
+        <input type="text" placeholder="Last Name" formControlName="last_name">
+    </div>
+    <div>
+        <label>Preferred Name</label>
+        <input type="text" placeholder="Preferred Name" formControlName="preferred_name">
+    </div>
+    <div>
+        <label>SSN</label>
+        <input type="text" placeholder="***-**-****" formControlName="ssn">
+    </div>
+    <div>
+        <label>Date of Birth</label>
+        <input type="text" placeholder="DOB" formControlName="dob">
+    </div>
+
+    <h4>Address</h4>
+    <div>
+        <label>Street</label>
+        <input type="text" placeholder="Street" formControlName="street">
+    </div>
+    <div>
+        <label>Building/Apt#</label>
+        <input type="text" placeholder="Building/Apt#" formControlName="apt">
+    </div>
+    <div>
+        <label>City</label>
+        <input type="text" placeholder="City" formControlName="city">
+    </div>
+    <div>
+        <label>State</label>
+        <input type="text" placeholder="State" formControlName="state">
+    </div>
+    <div>
+        <label>Zipcode</label>
+        <input type="text" placeholder="Zipcode" formControlName="zipcode">
+    </div>
+    <div>
+        <label>CellPhone</label>
+        <input type="text" placeholder="Cellphone" formControlName="cellphone">
+    </div>
+    <div>
+        <label>WorkPhone</label>
+        <input type="text" placeholder="Workphone" formControlName="workphone">
+    </div>
+
+
+    <h4>Emergency Contact</h4>
+    <div>
+        <label>First Name</label>
+        <input type="text" placeholder="First Name" formControlName="emerg_first_name">
+    </div>
+    <div>
+        <label>Middle Name</label>
+        <input type="text" placeholder="Middle Name" formControlName="emerg_middle_name">
+    </div>
+    <div>
+        <label>Last Name</label>
+        <input type="text" placeholder="Last Name" formControlName="emerg_last_name">
+    </div>
+    <div>
+        <label>Phone</label>
+        <input type="text" placeholder="Phone" formControlName="emerg_phone">
+    </div>
+    <div>
+        <label>Email</label>
+        <input type="text" placeholder="Email" formControlName="emerg_email">
+    </div>
+    <div>
+        <label>Relationship</label>
+        <input type="text" placeholder="Relationship" formControlName="emerg_relationship">
+    </div>
+    <br>
+    <button (click)="onClick()">Submit</button>
+</form>
