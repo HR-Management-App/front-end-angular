@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { emptyValidator } from '../services/empty.validator';
+import { FileDetails } from '../domain/file-details.model';
+import { FileUploadService } from '../services/file.upload.service';
+import { UploadResponse } from '../response/upload-response.model';
 
 @Component({
   selector: 'app-application-form',
@@ -9,7 +12,7 @@ import { emptyValidator } from '../services/empty.validator';
 })
 export class ApplicationFormComponent implements OnInit {
 
-  constructor() { }
+  constructor(private fileUploadService: FileUploadService) { }
 
   ngOnInit(): void {
     // throw new Error('Method not implemented.');
@@ -81,6 +84,12 @@ export class ApplicationFormComponent implements OnInit {
     ref_relationship: ['', emptyValidator()],
   })
 
+  file!: File;
+
+  selectFile(event: any) {
+    this.file = event.target.files.item(0);
+  }
+
   onClick() {
 
     // const { username, email, password } = this.fBuilder.controls;
@@ -90,6 +99,15 @@ export class ApplicationFormComponent implements OnInit {
     // }
 
     // if (!this.fBuilder.valid) alert('Fields cannot be empty!');
+
+    this.fileUploadService.upload(this.file).subscribe({
+      next: (data) => {
+        alert(JSON.stringify(data));
+      },
+      error: (e) => {
+        console.log(e);
+      }
+    });
 
     console.log(this.fBuilder.getRawValue());
   }
