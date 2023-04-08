@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
     //   // .pipe(catchError((err) => of([{ err }])))
     //   .subscribe((app: Application) => this.application = app);
     // console.log(this.application);
-    // // this.applicationService.onSubscribe().pipe(catchError((error) => of([err]))).subscribe(new)
+    // this.applicationService.onSubscribe().pipe(catchError((error) => of([err]))).subscribe(new)
   }
 
 }
