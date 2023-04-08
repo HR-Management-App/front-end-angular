@@ -15,14 +15,14 @@ export class AppComponent implements OnInit {
   constructor(private applicationService: ApplicationService) { }
 
   ngOnInit(): void {
-    let response = this.applicationService.getData();
-    console.log(response);
+    // let response = this.applicationService.getData();
+    // console.log(response);
 
-    response
-      // .pipe(catchError((err) => of([{ err }])))
-      .subscribe((app: Application) => this.application = app);
-
-    // this.applicationService.onSubscribe().pipe(catchError((error) => of([err]))).subscribe(new)
+    // response
+    //   // .pipe(catchError((err) => of([{ err }])))
+    //   .subscribe((app: Application) => this.application = app);
+    // console.log(this.application);
+    // // this.applicationService.onSubscribe().pipe(catchError((error) => of([err]))).subscribe(new)
   }
 
 }
