@@ -3,86 +3,187 @@
 <!-- Reactive Forms -->
 <!-- Bind formGroup to form and formControlName to controls in Reactive Forms -->
 <form [formGroup]="fBuilder">
-    <h4>Full Name</h4>
+    <h3>Personal Information</h3>
     <div>
-        <label>First Name</label>
+        <label><strong>First Name</strong></label>
         <input type="text" placeholder="First Name" formControlName="first_name">
     </div>
     <div>
-        <label>Middle Name</label>
+        <label><strong>Middle Name</strong></label>
         <input type="text" placeholder="Middle Name" formControlName="middle_name">
     </div>
     <div>
-        <label>Last Name</label>
+        <label><strong>Last Name</strong></label>
         <input type="text" placeholder="Last Name" formControlName="last_name">
     </div>
     <div>
-        <label>Preferred Name</label>
+        <label><strong>Preferred Name</strong></label>
         <input type="text" placeholder="Preferred Name" formControlName="preferred_name">
     </div>
     <div>
-        <label>SSN</label>
+        <label><strong>SSN</strong></label>
         <input type="text" placeholder="***-**-****" formControlName="ssn">
     </div>
     <div>
-        <label>Date of Birth</label>
+        <label><strong>Date of Birth</strong></label>
         <input type="text" placeholder="DOB" formControlName="dob">
     </div>
-
-    <h4>Address</h4>
     <div>
-        <label>Street</label>
+        <label><strong>Gender</strong></label>
+        <input id="male-option" type="radio" value="male" formControlName="gender">
+        <label>Male</label>
+
+        <input id="female-option" type="radio" value="female" formControlName="gender">
+        <label>Female</label>
+
+        <input id="other-option" type="radio" value="other" formControlName="gender">
+        <label>I do not wish to answer</label>
+    </div>
+    <div>
+        <label><strong>Are you a citizen or permanent resident of the U.S?</strong></label>
+        <div *ngFor="let option of citizen_options; let n = index;">
+            <label>
+                <input value="{{option.name}}" type="radio" formControlName="is_citizen" (change)="onOptionChange(n)">
+                {{option.name}}
+            </label>
+        </div>
+
+        <div *ngIf="yes_no == 0">
+            <strong>Status</strong>
+            <input type="radio" value="Green Card" formControlName="visa_title">
+            <label>Green Card</label>
+            <input type="radio" value="Citizen" formControlName="visa_title">
+            <label>Citizen</label>
+        </div>
+        <div *ngIf="yes_no == 1">
+            <strong>Status</strong>
+            <div *ngFor="let visa of visas; let i = index;">
+                <label>
+                    <input value="{{visa.name}}" type="radio" formControlName="visa_title" (change)="onItemChange(i)">
+                    {{visa.name}}
+                </label>
+            </div>
+
+            <div *ngIf="isVisible == 2">
+                <input type="file" class="file-upload" onchange="console.log(event.target.files)">
+            </div>
+            <div *ngIf="isVisible == 4">
+                <input type="text">
+            </div>
+
+            <div>
+                <label><strong>Start Date</strong></label>
+                <input type="text" placeholder="MM/DD/YYYY" formControlName="start_date">
+            </div>
+            <div>
+                <label><strong>End Date</strong></label>
+                <input type="text" placeholder="MM/DD/YYYY" formControlName="end_date">
+            </div>
+        </div>
+
+    </div>
+
+    <h3>Address</h3>
+    <div>
+        <label><strong>Street</strong></label>
         <input type="text" placeholder="Street" formControlName="street">
     </div>
     <div>
-        <label>Building/Apt#</label>
+        <label><strong>Building/Apt#</strong></label>
         <input type="text" placeholder="Building/Apt#" formControlName="apt">
     </div>
     <div>
-        <label>City</label>
+        <label><strong>City</strong></label>
         <input type="text" placeholder="City" formControlName="city">
     </div>
     <div>
-        <label>State</label>
+        <label><strong>State</strong></label>
         <input type="text" placeholder="State" formControlName="state">
     </div>
     <div>
-        <label>Zipcode</label>
+        <label><strong>Zipcode</strong></label>
         <input type="text" placeholder="Zipcode" formControlName="zipcode">
     </div>
     <div>
-        <label>CellPhone</label>
+        <label><strong>CellPhone</strong></label>
         <input type="text" placeholder="Cellphone" formControlName="cellphone">
     </div>
     <div>
-        <label>WorkPhone</label>
+        <label><strong>WorkPhone</strong></label>
         <input type="text" placeholder="Workphone" formControlName="workphone">
     </div>
 
-
-    <h4>Emergency Contact</h4>
+    <h3>Do you have a driver's license</h3>
     <div>
-        <label>First Name</label>
+        <input name="driver-lic" [(ngModel)]="driver_option" type="radio" [ngModelOptions]="{standalone: true}"
+            value="Yes">Yes
+        <input name="driver-lic" [(ngModel)]="driver_option" type="radio" [ngModelOptions]="{standalone: true}"
+            value="No">No
+    </div>
+
+    <div *ngIf="driver_option == 'Yes'">
+        <input type="file" class="file-upload" onchange="console.log(event.target.files)">
+    </div>
+
+
+    <div>
+        <label><strong>Street</strong></label>
+        <input type="text" placeholder="Street" formControlName="street">
+    </div>
+    <div>
+        <label><strong>Building/Apt#</strong></label>
+        <input type="text" placeholder="Building/Apt#" formControlName="apt">
+    </div>
+
+    <h3>Reference</h3>
+    <div>
+        <label><strong>First Name</strong></label>
+        <input type="text" placeholder="First Name" formControlName="ref_first_name">
+    </div>
+    <div>
+        <label><strong>Middle Name</strong></label>
+        <input type="text" placeholder="Middle Name" formControlName="ref_middle_name">
+    </div>
+    <div>
+        <label><strong>Last Name</strong></label>
+        <input type="text" placeholder="Last Name" formControlName="ref_last_name">
+    </div>
+    <div>
+        <label><strong>Phone</strong></label>
+        <input type="text" placeholder="Phone" formControlName="ref_phone">
+    </div>
+    <div>
+        <label><strong>Email</strong></label>
+        <input type="text" placeholder="Email" formControlName="ref_email">
+    </div>
+    <div>
+        <label><strong>Relationship</strong></label>
+        <input type="text" placeholder="Relationship" formControlName="ref_relationship">
+    </div>
+
+    <h3>Emergency Contact</h3>
+    <div>
+        <label><strong>First Name</strong></label>
         <input type="text" placeholder="First Name" formControlName="emerg_first_name">
     </div>
     <div>
-        <label>Middle Name</label>
+        <label><strong>Middle Name</strong></label>
         <input type="text" placeholder="Middle Name" formControlName="emerg_middle_name">
     </div>
     <div>
-        <label>Last Name</label>
+        <label><strong>Last Name</strong></label>
         <input type="text" placeholder="Last Name" formControlName="emerg_last_name">
     </div>
     <div>
-        <label>Phone</label>
+        <label><strong>Phone</strong></label>
         <input type="text" placeholder="Phone" formControlName="emerg_phone">
     </div>
     <div>
-        <label>Email</label>
+        <label><strong>Email</strong></label>
         <input type="text" placeholder="Email" formControlName="emerg_email">
     </div>
     <div>
-        <label>Relationship</label>
+        <label><strong>Relationship</strong></label>
         <input type="text" placeholder="Relationship" formControlName="emerg_relationship">
     </div>
     <br>
