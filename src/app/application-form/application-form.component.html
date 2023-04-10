@@ -26,7 +26,7 @@
     </div>
     <div>
         <label><strong>Date of Birth</strong></label>
-        <input type="text" placeholder="DOB" formControlName="dob">
+        <input type="text" placeholder="YYYY-MM-DD" formControlName="dob">
     </div>
     <div>
         <label><strong>Gender</strong></label>
@@ -65,7 +65,7 @@
             </div>
 
             <div *ngIf="isVisible == 2">
-                <input type="file" class="file-upload" (change)="selectFile($event)">
+                <input type="file" class="file-upload" (change)="selectVisaFile($event)">
             </div>
             <div *ngIf="isVisible == 4">
                 <input type="text">
@@ -73,11 +73,11 @@
 
             <div>
                 <label><strong>Start Date</strong></label>
-                <input type="text" placeholder="MM/DD/YYYY" formControlName="start_date">
+                <input type="text" placeholder="YYYY-MM-DD" formControlName="start_date">
             </div>
             <div>
                 <label><strong>End Date</strong></label>
-                <input type="text" placeholder="MM/DD/YYYY" formControlName="end_date">
+                <input type="text" placeholder="YYYY-MM-DD" formControlName="end_date">
             </div>
         </div>
 
@@ -122,17 +122,9 @@
     </div>
 
     <div *ngIf="driver_option == 'Yes'">
-        <input type="file" class="file-upload" onchange="console.log(event.target.files)">
-    </div>
-
-
-    <div>
-        <label><strong>Street</strong></label>
-        <input type="text" placeholder="Street" formControlName="street">
-    </div>
-    <div>
-        <label><strong>Building/Apt#</strong></label>
-        <input type="text" placeholder="Building/Apt#" formControlName="apt">
+        <label><strong>Driver License Number</strong></label>
+        <input type="text" placeholder="Driver License Number" formControlName="driver_lic_num">
+        <input type="file" class="file-upload" (change)="selectDriverFile($event)">
     </div>
 
     <h3>Reference</h3>
