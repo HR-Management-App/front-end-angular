@@ -63,10 +63,6 @@
                     {{visa.name}}
                 </label>
             </div>
-
-            <div *ngIf="isVisible == 2">
-                <input type="file" class="file-upload" (change)="selectVisaFile($event)">
-            </div>
             <div *ngIf="isVisible == 4">
                 <input type="text">
             </div>
@@ -80,6 +76,7 @@
                 <input type="text" placeholder="YYYY-MM-DD" formControlName="end_date">
             </div>
         </div>
+        <input type="file" class="file-upload" (change)="selectVisaFile($event)">
 
     </div>
 
