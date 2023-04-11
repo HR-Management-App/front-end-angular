@@ -7,10 +7,13 @@ import { ApplicationFormComponent } from './application-form/application-form.co
 import { UserHomePageComponent } from './user-home-page/user-home-page.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 
+import { LoginComponent } from './login/login.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     ApplicationFormComponent,
+    LoginComponent,
     UserHomePageComponent
   ],
   imports: [
