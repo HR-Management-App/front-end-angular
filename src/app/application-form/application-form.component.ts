@@ -10,6 +10,7 @@ import { Visa } from '../domain/EmployeeService/visa';
 import { Address } from '../domain/EmployeeService/address';
 import { PersonalDocument } from '../domain/EmployeeService/personal.document';
 import { EmployeeInfoUploadService } from '../services/employee.info.upload.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-application-form',
@@ -19,7 +20,8 @@ import { EmployeeInfoUploadService } from '../services/employee.info.upload.serv
 export class ApplicationFormComponent implements OnInit {
 
   constructor(private fileUploadService: FileUploadService,
-    private infoUploadService: EmployeeInfoUploadService) { }
+    private infoUploadService: EmployeeInfoUploadService,
+    private _router: Router) { }
 
   ngOnInit(): void {
     // throw new Error('Method not implemented.');
@@ -110,30 +112,17 @@ export class ApplicationFormComponent implements OnInit {
     // }
 
     // if (!this.fBuilder.valid) alert('Fields cannot be empty!');
-    let visaPath;
-    this.fileUploadService.upload(this.visaFile, 'visa').subscribe({
-      next: (data) => {
-        console.log("uploaded" + JSON.stringify(data));
-        let json = JSON.stringify(data);
-        let obj = JSON.parse(json);
-        visaPath = obj.filename;
-      },
-      error: (e) => {
-        console.log(e);
-      }
-    });
-    let driverPath;
-    this.fileUploadService.upload(this.driverFile, 'driver_license').subscribe({
-      next: (data) => {
-        console.log("uploaded" + JSON.stringify(data));
-        let json = JSON.stringify(data);
-        let obj = JSON.parse(json);
-        driverPath = obj.filename;
-      },
-      error: (e) => {
-        console.log(e);
-      }
-    });
+    // let visaPath = '';
+    // let driverPath = '';
+    let visaDoc = new PersonalDocument(
+      '',
+      "visa",
+    );
+    let driverDoc = new PersonalDocument(
+      '',
+      "driver_license",
+    );
+    let docList: PersonalDocument[] = [];
 
     let contact = new Contact(
       this.fBuilder.controls['emerg_first_name'].value,
@@ -163,25 +152,15 @@ export class ApplicationFormComponent implements OnInit {
     let addressList: Address[] = [];
     addressList.push(address);
 
-    let visaDoc = new PersonalDocument(
-      visaPath,
-      "visa",
-    );
-    let driverDoc = new PersonalDocument(
-      driverPath,
-      "driver_license",
-    );
-    let docList: PersonalDocument[] = [];
-    docList.push(visaDoc);
-    docList.push(driverDoc);
-
+    let user_id = Number(sessionStorage.getItem('user_id'));
+    let user_email = sessionStorage.getItem('user_email');
     let employee = new Employee(
-      1, // userID
+      user_id,
       this.fBuilder.controls['first_name'].value,
       this.fBuilder.controls['last_name'].value,
       this.fBuilder.controls['middle_name'].value,
       this.fBuilder.controls['preferred_name'].value,
-      "1@test.com", // email
+      user_email,
       this.fBuilder.controls['cellphone'].value,
       this.fBuilder.controls['workphone'].value,
       this.fBuilder.controls['gender'].value,
@@ -197,12 +176,41 @@ export class ApplicationFormComponent implements OnInit {
       docList
     );
 
-    this.infoUploadService.uploadEmployeeToDb(employee).subscribe({
-      next: (data) => {
-        console.log("uploaded" + JSON.stringify(data));
-        let json = JSON.stringify(data);
+    this.fileUploadService.upload(this.visaFile, 'visa/' + user_id).subscribe({
+      next: (visa_data) => {
+        console.log("uploaded" + JSON.stringify(visa_data));
+        let json = JSON.stringify(visa_data);
         let obj = JSON.parse(json);
-        alert("Updated application form for employee#" + obj.emp_id);
+        visaDoc.path = obj.filename;
+        this.fileUploadService.upload(this.driverFile, 'driver_license/' + user_id).subscribe({
+          next: (driver_data) => {
+            console.log("uploaded" + JSON.stringify(driver_data));
+            let json = JSON.stringify(driver_data);
+            let obj = JSON.parse(json);
+            // driverPath = obj.filename;
+            driverDoc.path = obj.filename;
+            docList.push(visaDoc);
+            docList.push(driverDoc);
+            this.infoUploadService.uploadEmployeeToDb(employee).subscribe({
+              next: (data) => {
+                console.log("uploaded" + JSON.stringify(data));
+                let json = JSON.stringify(data);
+                let obj = JSON.parse(json);
+
+                alert("Updated application form for employee#" + obj.emp_id + " application#" + obj.app_id);
+              },
+              complete: () => {
+                this._router.navigate(['/user-home']);
+              },
+              error: (e) => {
+                console.log(e);
+              }
+            });
+          },
+          error: (e) => {
+            console.log(e);
+          }
+        });
       },
       error: (e) => {
         console.log(e);

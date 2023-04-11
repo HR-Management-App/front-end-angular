@@ -4,6 +4,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ApplicationFormComponent } from './application-form/application-form.component';
+import { UserHomePageComponent } from './user-home-page/user-home-page.component';
+import { AppRoutingModule } from './app-routing/app-routing.module';
 
 import { LoginComponent } from './login/login.component';
 
@@ -11,13 +13,15 @@ import { LoginComponent } from './login/login.component';
   declarations: [
     AppComponent,
     ApplicationFormComponent,
-    LoginComponent
+    LoginComponent,
+    UserHomePageComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
