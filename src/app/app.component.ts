@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Application } from './domain/Application';
-import { ApplicationService } from './services/application.service';
+import { Router } from '@angular/router';
 import { catchError, from, of, throwError, Observable } from 'rxjs';
 
 @Component({
@@ -10,19 +9,16 @@ import { catchError, from, of, throwError, Observable } from 'rxjs';
 })
 export class AppComponent implements OnInit {
 
-  application: Application = new Application();
 
-  constructor(private applicationService: ApplicationService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    // let response = this.applicationService.getData();
-    // console.log(response);
+    let tokenStr = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbXBsb3llZTExMTEiLCJ1c2VyX2lkIjo3LCJlbWFpbCI6InRlc3QxMjM1NDVAdGVtbC5uZXQiLCJwZXJtaXNzaW9ucyI6W3siYXV0aG9yaXR5IjoiZW1wbG95ZWUifV19.dIdNlk1eaKVg7Zwzc0TwBCTipMil_-VduBgA0FZqjL0";
+    sessionStorage.setItem('token', tokenStr);
+    sessionStorage.setItem('user_id', "7");
+    sessionStorage.setItem('user_email', "test123545@teml.net");
+    console.log(sessionStorage.getItem('token'));
 
-    // response
-    //   // .pipe(catchError((err) => of([{ err }])))
-    //   .subscribe((app: Application) => this.application = app);
-    // console.log(this.application);
-    // this.applicationService.onSubscribe().pipe(catchError((error) => of([err]))).subscribe(new)
   }
 
 }
