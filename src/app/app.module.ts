@@ -12,6 +12,8 @@ import { UserNavBarComponent } from './user-nav-bar/user-nav-bar.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RouterModule } from '@angular/router';
 
+import { LoginComponent } from './login/login.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +23,9 @@ import { RouterModule } from '@angular/router';
     UserHousingComponent,
     UserNavBarComponent,
     UserProfileComponent
+    LoginComponent,
+   //UserHomePageComponent
+
   ],
   imports: [
 
