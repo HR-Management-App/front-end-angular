@@ -11,7 +11,6 @@ import { UserHousingComponent } from './user-housing/user-housing.component';
 import { UserNavBarComponent } from './user-nav-bar/user-nav-bar.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RouterModule } from '@angular/router';
-
 import { LoginComponent } from './login/login.component';
 
 @NgModule({
@@ -22,10 +21,9 @@ import { LoginComponent } from './login/login.component';
     UserDocListComponent,
     UserHousingComponent,
     UserNavBarComponent,
-    UserProfileComponent
+    UserProfileComponent,
     LoginComponent,
-   //UserHomePageComponent
-
+    //UserHomePageComponent
   ],
   imports: [
 
@@ -39,4 +37,5 @@ import { LoginComponent } from './login/login.component';
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
