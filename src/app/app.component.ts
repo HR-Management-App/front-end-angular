@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Application } from './domain/Application';
-import { ApplicationService } from './services/application.service';
+import { Router } from '@angular/router';
 import { catchError, from, of, throwError, Observable } from 'rxjs';
+import { ApplicationService } from './services/application.service';
+import { EmployeeService } from './services/employee.service';
 
 @Component({
   selector: 'app-root',
@@ -10,19 +11,26 @@ import { catchError, from, of, throwError, Observable } from 'rxjs';
 })
 export class AppComponent implements OnInit {
 
-  application: Application = new Application();
 
   constructor(private applicationService: ApplicationService) { }
 
   ngOnInit(): void {
-    // let response = this.applicationService.getData();
-    // console.log(response);
-
-    // response
-    //   // .pipe(catchError((err) => of([{ err }])))
-    //   .subscribe((app: Application) => this.application = app);
-    // console.log(this.application);
-    // this.applicationService.onSubscribe().pipe(catchError((error) => of([err]))).subscribe(new)
+    // let tokenStr: string = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbXBsb3llZTExMTEiLCJ1c2VyX2lkIjo3LCJlbWFpbCI6InRlc3QxMjM1NDVAdGVtbC5uZXQiLCJwZXJtaXNzaW9ucyI6W3siYXV0aG9yaXR5IjoiZW1wbG95ZWUifV19.dIdNlk1eaKVg7Zwzc0TwBCTipMil_-VduBgA0FZqjL0";
+    // sessionStorage.setItem('token', tokenStr);
+    // sessionStorage.setItem('user_id', "7");
+    // sessionStorage.setItem('user_email', "test123545@teml.net");
+    // console.log(sessionStorage.getItem('token'));
+    // this.applicationService.getEmployeeID(7).subscribe({
+    //   next: (data) => {
+    //     console.log("uploaded" + JSON.stringify(data));
+    //     let json = JSON.stringify(data);
+    //     let obj = JSON.parse(json);
+    //     console.log(obj.emp_id);
+    //     sessionStorage.setItem("emp_id", obj.emp_id);
+    //   }
+    // });
   }
+
+
 
 }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Application } from '../domain/Application';
@@ -7,21 +7,30 @@ import { Application } from '../domain/Application';
 @Injectable({ providedIn: 'root' })
 export class ApplicationService {
 
-    constructor(private http: HttpClient) { }
+    constructor(private httpClient: HttpClient) { }
 
-    getData() {
-        return this.http.get('http://localhost:8080/composite/app');
+    run(): Observable<string> {
+        const headers = new HttpHeaders()
+            .set('Authorization', 'Bearer ' + sessionStorage.getItem('token'))
+
+        return this.httpClient.get<string>('http://localhost:8080/composite/status', { 'headers': headers });
     }
 
-    subject = new Subject();
+    getEmployeeID(user_id: number): Observable<string> {
+        const headers = new HttpHeaders()
+            .set('Authorization', 'Bearer ' + sessionStorage.getItem('token'))
 
-    onSubscribe() {
-        return this.subject.asObservable();
+        return this.httpClient.get<string>('http://localhost:8080/composite/' + user_id, { 'headers': headers });
     }
 
-    // public getApplication(): Observable<Application> {
-    //     return this.http.get<Application>('http://localhost:8080/composite/app');
-    // }
+    getDigitalPath(type: string): Observable<string> {
+        const headers = new HttpHeaders()
+            .set('Authorization', 'Bearer ' + sessionStorage.getItem('token'))
+
+        return this.httpClient.get<string>('http://localhost:8080/composite/digital?type=' + type,
+            { 'headers': headers });
+    }
+
 
 
 }

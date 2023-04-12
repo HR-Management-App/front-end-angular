@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<div *ngIf="isLoaded == false">
+
+  <h2>Registration</h2>
+
+  <form [formGroup]="fBuilder">
+      <div>
+          <label><strong>Username</strong></label>
+          <input type="text" formControlName="username">
+      </div>
+      <div>
+          <label><strong>Email</strong></label>
+          <input type="text" formControlName="email">
+      </div>
+      <div>
+          <label><strong>Password</strong></label>
+          <input type="text" formControlName="password">
+      </div>
+
+      <br>
+      <button (click)="onClick()">Register</button>
+  </form>
+
+</div>

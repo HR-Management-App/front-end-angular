@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { emptyValidator } from '../services/empty.validator';
-import { FileDetails } from '../domain/file-details.model';
-import { FileUploadService } from '../services/file.upload.service';
-import { UploadResponse } from '../response/upload-response.model';
 import { Employee } from '../domain/EmployeeService/employee';
 import { Contact } from '../domain/EmployeeService/contact';
 import { Visa } from '../domain/EmployeeService/visa';
 import { Address } from '../domain/EmployeeService/address';
 import { PersonalDocument } from '../domain/EmployeeService/personal.document';
-import { EmployeeInfoUploadService } from '../services/employee.info.upload.service';
+import { Router } from '@angular/router';
+import { EmployeeService } from '../services/employee.service';
+import { ApplicationService } from '../services/application.service';
+import { saveAs } from 'file-saver';
+
 
 @Component({
   selector: 'app-application-form',
@@ -18,11 +19,36 @@ import { EmployeeInfoUploadService } from '../services/employee.info.upload.serv
 })
 export class ApplicationFormComponent implements OnInit {
 
-  constructor(private fileUploadService: FileUploadService,
-    private infoUploadService: EmployeeInfoUploadService) { }
+  isLoaded: boolean = false;
+
+  constructor(private service: EmployeeService,
+    private _router: Router,
+    private appService: ApplicationService) { }
+
+  contractPath: string = '';
+  contractFile: string = '';
+  taxPath: string = '';
+  taxFile: string = '';
 
   ngOnInit(): void {
-    // throw new Error('Method not implemented.');
+    this.appService.getDigitalPath('contract').subscribe({
+      next: (data) => {
+        let json = JSON.stringify(data);
+        let obj = JSON.parse(json);
+        this.contractPath = obj.path;
+        this.contractFile = obj.path.split('/')[1];
+      }
+    });
+
+    this.appService.getDigitalPath('tax').subscribe({
+      next: (data) => {
+        let json = JSON.stringify(data);
+        let obj = JSON.parse(json);
+        this.taxPath = obj.path;
+        this.taxFile = obj.path.split('/')[1];
+      },
+    });
+    this.isLoaded = true;
   }
 
   citizen_options = [
@@ -93,13 +119,36 @@ export class ApplicationFormComponent implements OnInit {
 
   visaFile!: File;
   driverFile!: File;
+  taxSignedFile!: File;
+  contractSignedFile!: File;
 
   selectVisaFile(event: any) {
     this.visaFile = event.target.files.item(0);
   }
-
   selectDriverFile(event: any) {
     this.driverFile = event.target.files.item(0);
+  }
+  selectTaxFile(event: any) {
+    this.taxSignedFile = event.target.files.item(0);
+  }
+  selectContractFile(event: any) {
+    this.contractSignedFile = event.target.files.item(0);
+  }
+
+  downloadContract() {
+    this.service.download(this.contractPath).subscribe(
+      (data: any) => {
+        saveAs(data, this.contractFile);
+      }
+    );
+
+  }
+  downloadTax() {
+    this.service.download(this.taxPath).subscribe(
+      (data: any) => {
+        saveAs(data, this.taxFile);
+      }
+    );
   }
 
   onClick() {
@@ -110,30 +159,26 @@ export class ApplicationFormComponent implements OnInit {
     // }
 
     // if (!this.fBuilder.valid) alert('Fields cannot be empty!');
-    let visaPath;
-    this.fileUploadService.upload(this.visaFile, 'visa').subscribe({
-      next: (data) => {
-        console.log("uploaded" + JSON.stringify(data));
-        let json = JSON.stringify(data);
-        let obj = JSON.parse(json);
-        visaPath = obj.filename;
-      },
-      error: (e) => {
-        console.log(e);
-      }
-    });
-    let driverPath;
-    this.fileUploadService.upload(this.driverFile, 'driver_license').subscribe({
-      next: (data) => {
-        console.log("uploaded" + JSON.stringify(data));
-        let json = JSON.stringify(data);
-        let obj = JSON.parse(json);
-        driverPath = obj.filename;
-      },
-      error: (e) => {
-        console.log(e);
-      }
-    });
+    // let visaPath = '';
+    // let driverPath = '';
+    let visaDoc = new PersonalDocument(
+      '',
+      "visa",
+    );
+    let driverDoc = new PersonalDocument(
+      '',
+      "driver_license",
+    );
+    let contractDoc = new PersonalDocument(
+      '',
+      "contract",
+    );
+    let taxDoc = new PersonalDocument(
+      '',
+      "tax",
+    );
+
+    let docList: PersonalDocument[] = [];
 
     let contact = new Contact(
       this.fBuilder.controls['emerg_first_name'].value,
@@ -163,25 +208,15 @@ export class ApplicationFormComponent implements OnInit {
     let addressList: Address[] = [];
     addressList.push(address);
 
-    let visaDoc = new PersonalDocument(
-      visaPath,
-      "visa",
-    );
-    let driverDoc = new PersonalDocument(
-      driverPath,
-      "driver_license",
-    );
-    let docList: PersonalDocument[] = [];
-    docList.push(visaDoc);
-    docList.push(driverDoc);
-
+    let user_id = Number(sessionStorage.getItem('user_id'));
+    let user_email = sessionStorage.getItem('user_email');
     let employee = new Employee(
-      1, // userID
+      user_id,
       this.fBuilder.controls['first_name'].value,
       this.fBuilder.controls['last_name'].value,
       this.fBuilder.controls['middle_name'].value,
       this.fBuilder.controls['preferred_name'].value,
-      "1@test.com", // email
+      user_email,
       this.fBuilder.controls['cellphone'].value,
       this.fBuilder.controls['workphone'].value,
       this.fBuilder.controls['gender'].value,
@@ -197,12 +232,65 @@ export class ApplicationFormComponent implements OnInit {
       docList
     );
 
-    this.infoUploadService.uploadEmployeeToDb(employee).subscribe({
-      next: (data) => {
-        console.log("uploaded" + JSON.stringify(data));
-        let json = JSON.stringify(data);
+    this.service.upload(this.visaFile, 'visa/' + user_id).subscribe({
+      next: (visa_data) => {
+        console.log("uploaded" + JSON.stringify(visa_data));
+        let json = JSON.stringify(visa_data);
         let obj = JSON.parse(json);
-        alert("Updated application form for employee#" + obj.emp_id);
+        visaDoc.path = obj.filename;
+        docList.push(visaDoc);
+        this.service.upload(this.driverFile, 'driver_license/' + user_id).subscribe({
+          next: (driver_data) => {
+            console.log("uploaded" + JSON.stringify(driver_data));
+            let json = JSON.stringify(driver_data);
+            let obj = JSON.parse(json);
+            // driverPath = obj.filename;
+            driverDoc.path = obj.filename;
+            docList.push(driverDoc);
+            this.service.upload(this.contractSignedFile, 'contract/' + user_id).subscribe({
+              next: (data) => {
+                console.log("uploaded" + JSON.stringify(data));
+                let json = JSON.stringify(data);
+                let obj = JSON.parse(json);
+                contractDoc.path = obj.filename;
+                docList.push(contractDoc);
+                this.service.upload(this.taxSignedFile, 'tax/' + user_id).subscribe({
+                  next: (data) => {
+                    console.log("uploaded" + JSON.stringify(data));
+                    let json = JSON.stringify(data);
+                    let obj = JSON.parse(json);
+                    taxDoc.path = obj.filename;
+                    docList.push(taxDoc);
+                    this.service.uploadEmployeeToDb(employee).subscribe({
+                      next: (data) => {
+                        console.log("uploaded" + JSON.stringify(data));
+                        let json = JSON.stringify(data);
+                        let obj = JSON.parse(json);
+                        sessionStorage.setItem('emp_id', obj.emp_id);
+                        alert("Updated application form for employee#" + obj.emp_id + " application#" + obj.app_id);
+                      },
+                      complete: () => {
+                        this._router.navigate(['/user-home']);
+                      },
+                      error: (e) => {
+                        console.log(e);
+                      }
+                    });
+                  },
+                  error: (e) => {
+                    console.log(e);
+                  }
+                });
+              },
+              error: (e) => {
+                console.log(e);
+              }
+            });
+          },
+          error: (e) => {
+            console.log(e);
+          }
+        });
       },
       error: (e) => {
         console.log(e);
