@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <div class="login-container">
     <h1>Login</h1>
     <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
@@ -9,6 +12,6 @@
         <label for="password">Password:</label>
         <input type="password" id="password" [(ngModel)]="credentials.password" name="password" required>
       </div>
-      <button type="submit" [disabled]="!loginForm.form.valid">Login</button>
+      <button type="submit" [disabled]="!loginForm.form.valid">Submit</button>
     </form>
   </div>
