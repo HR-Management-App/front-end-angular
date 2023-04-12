@@ -12,8 +12,7 @@ import { HiringApplicationPendingComponent } from './hr/hiring-application-pendi
 import { HiringPanelComponent } from './hr/hiring-panel/hiring-panel.component';
 import { HomeComponent } from './hr/home/home.component';
 import { StatusTrackComponent } from './hr/status-track/status-track.component';
-import { AppRoutingModule } from './app-routing.module';
-
+// import { AppRoutingModule } from './app-routing.module';
 import { UserHomePageComponent } from './user-home-page/user-home-page.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { UserDocListComponent } from './user-doc-list/user-doc-list.component';
@@ -36,7 +35,7 @@ import { AuthRegistrationTokenComponent } from './auth-registrationToken/auth-re
     EmployeesProfileComponent,
     HiringApplicationPendingComponent,
     HiringPanelComponent,
-    HomeComponent,
+    HomeComponent, // HR
     StatusTrackComponent,
     UserHomePageComponent,
     UserDocListComponent,
