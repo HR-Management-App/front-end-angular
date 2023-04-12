@@ -13,22 +13,22 @@ import { AuthRegistrationTokenComponent } from '../auth-registrationToken/auth-r
 
 
 const routes: Routes = [
+  { path: 'auth-login', component: AuthLoginComponent },
   { path: '', component: UserHomePageComponent },
   { path: 'application', component: ApplicationFormComponent },
   { path: 'user-home', component: UserHomePageComponent },
   { path: 'user-doc-list', component: UserDocListComponent },
   { path: 'user-housing', component: UserHousingComponent },
   { path: 'user-profile', component: UserProfileComponent },
-  { path: 'auth-login', component : AuthLoginComponent },
-  { path: 'auth-registration', component : AuthRegistrationComponent},
-  { path:'auth-registrationToken', component : AuthRegistrationTokenComponent}
+  { path: 'auth-registration', component: AuthRegistrationComponent },
+  { path: 'auth-registrationToken', component: AuthRegistrationTokenComponent },
   // {
   //   path: 'login',
   //   component: ProtectedCompComponent,
   //   canActivate: [AuthGuardService],
   // },
   // "Catch all" route must be last!
-  // { path: '**', component: UserHomePageComponent },
+  { path: '**', component: UserHomePageComponent },
 ];
 
 @NgModule({
