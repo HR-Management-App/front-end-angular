@@ -22,6 +22,8 @@ export class AuthenticationService {
         const body = JSON.stringify(credentials);
         const headers = new HttpHeaders().set('content-type', 'application/json');
 
+        console.log(body);
+
         return this.httpClient.post<AuthResponse>('http://localhost:7070/login', body, { 'headers': headers });
     }
 
@@ -35,8 +37,13 @@ export class AuthenticationService {
 
     tokenGeneration(newTokenRequest : NewTokenRequest) : Observable<AuthResponse> {
 
+      console.log("Test whether jwt token exist: " + sessionStorage.getItem('token'));
+
       const body = JSON.stringify(newTokenRequest);
-      const headers = new HttpHeaders().set('content-type', 'application/json');
+      const headers = new HttpHeaders()
+        .set('content-type', 'application/json')
+        .set('Authorization', 'Bearer ' + sessionStorage.getItem('token'));
+        // .set('Authorization', 'Bearer ' + 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJocjEiLCJ1c2VyX2lkIjoxLCJlbWFpbCI6ImhyMUB0ZXN0LmNvbSIsInBlcm1pc3Npb25zIjpbeyJhdXRob3JpdHkiOiJociJ9LHsiYXV0aG9yaXR5IjoiZW1wbG95ZWUifV19.3IOm2C8ZdS3XhWCQPi7EsKY7r4dZjoNM8aAuzU60cIE');
 
       return this.httpClient.post<AuthResponse>('http://localhost:7070/token/new', body, { 'headers': headers });
     }

@@ -8,7 +8,7 @@ import { emptyValidator } from '../services/empty.validator';
 import { NewTokenRequest } from '../domain/Authentication/newTokenRequest';
 
 @Component({
-  selector: 'app-auth-registrationToken',
+  selector: 'auth-registrationToken',
   templateUrl: './auth-registrationToken.component.html',
   styleUrls: ['./auth-registrationToken.component.css']
 })

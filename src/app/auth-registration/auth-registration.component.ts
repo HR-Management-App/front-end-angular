@@ -8,7 +8,7 @@ import { emptyValidator } from '../services/empty.validator';
 import { SignupRequest } from '../domain/Authentication/singupRequest';
 
 @Component({
-  selector: 'app-auth-registration',
+  selector: 'auth-registration',
   templateUrl: './auth-registration.component.html',
   styleUrls: ['./auth-registration.component.css']
 })
@@ -21,6 +21,7 @@ export class AuthRegistrationComponent implements OnInit {
     private appService: ApplicationService) { }
 
   ngOnInit(): void {
+    // this.isLoaded = false;
 
     // this._router = [{ path: 'signup/:registrationToken', component: AuthRegistrationComponent }];
 
