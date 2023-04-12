@@ -23,6 +23,14 @@ export class ApplicationService {
         return this.httpClient.get<string>('http://localhost:8080/composite/' + user_id, { 'headers': headers });
     }
 
+    getDigitalPath(type: string): Observable<string> {
+        const headers = new HttpHeaders()
+            .set('Authorization', 'Bearer ' + sessionStorage.getItem('token'))
+
+        return this.httpClient.get<string>('http://localhost:8080/composite/digital?type=' + type,
+            { 'headers': headers });
+    }
+
 
 
 }

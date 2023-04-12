@@ -12,4 +12,14 @@
         <input [(ngModel)]="driverFile" [ngModelOptions]="{standalone: true}" size="30" disabled>
         <button (click)="downloadDriver()">Download</button>
     </div>
+    <div>
+        <label><strong>Signed Contract</strong></label><br>
+        <input [(ngModel)]="contractFile" [ngModelOptions]="{standalone: true}" size="30" disabled>
+        <button (click)="downloadContract()">Download</button>
+    </div>
+    <div>
+        <label><strong>Signed Tax Agreement</strong></label><br>
+        <input [(ngModel)]="taxFile" [ngModelOptions]="{standalone: true}" size="30" disabled>
+        <button (click)="downloadTax()">Download</button>
+    </div>
 </form>

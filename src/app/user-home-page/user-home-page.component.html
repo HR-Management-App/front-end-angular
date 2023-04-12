@@ -4,7 +4,10 @@
 </div>
 
 <div *ngIf="application == 'pending'">
-    <h1>Please wait for HR to review your application</h1>
+    <div class="topnav">
+        <a routerLink="/user-doc-list">Documents</a>
+    </div>
+    <h4>Please wait for HR to review your application</h4>
 </div>
 
 <div *ngIf="application == 'approved'">

@@ -15,6 +15,10 @@ export class UserDocListComponent implements OnInit {
   visaFile: string = '';
   driverPath: string = '';
   driverFile: string = '';
+  contractPath: string = '';
+  contractFile: string = '';
+  taxPath: string = '';
+  taxFile: string = '';
 
   ngOnInit(): void {
     this.service.getDocumentPath(sessionStorage.getItem('emp_id'), 'visa').subscribe({
@@ -34,6 +38,24 @@ export class UserDocListComponent implements OnInit {
         this.driverFile = obj.path.split('/')[2];
       }
     });
+
+    this.service.getDocumentPath(sessionStorage.getItem('emp_id'), 'contract').subscribe({
+      next: (data) => {
+        let json = JSON.stringify(data);
+        let obj = JSON.parse(json);
+        this.contractPath = obj.path;
+        this.contractFile = obj.path.split('/')[2];
+      }
+    });
+
+    this.service.getDocumentPath(sessionStorage.getItem('emp_id'), 'tax').subscribe({
+      next: (data) => {
+        let json = JSON.stringify(data);
+        let obj = JSON.parse(json);
+        this.taxPath = obj.path;
+        this.taxFile = obj.path.split('/')[2];
+      }
+    });
   }
 
   downloadVisa() {
@@ -51,6 +73,25 @@ export class UserDocListComponent implements OnInit {
     this.service.download(this.driverPath).subscribe(
       (data: any) => {
         saveAs(data, this.driverFile);
+      }
+    );
+  }
+
+  downloadContract() {
+    this.service.download(this.contractPath).subscribe(
+      (data: any) => {
+        // let blob: any = new Blob([data], { type: 'text/json; charset=utf-8' });
+        // const url = window.URL.createObjectURL(data);
+        //window.open(url);
+        saveAs(data, this.contractFile);
+      }
+    );
+  }
+
+  downloadTax() {
+    this.service.download(this.taxPath).subscribe(
+      (data: any) => {
+        saveAs(data, this.taxFile);
       }
     );
   }

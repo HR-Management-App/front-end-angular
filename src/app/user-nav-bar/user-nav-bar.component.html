@@ -1,5 +1,6 @@
 <div class="topnav">
-    <a routerLink="/user-profile">Profile</a>
-    <a routerLink="/user-housing">Housing</a>
-    <a routerLink="/user-doc-list">Documents</a>
+    <a *ngIf="application == 'approved'" routerLink="/user-home">Home</a>
+    <a *ngIf="application == 'approved'" routerLink="/user-profile">Profile</a>
+    <a *ngIf="application == 'approved'" routerLink="/user-housing">Housing</a>
+    <a *ngIf="application != 'never submitted'" routerLink="/user-doc-list">Documents</a>
 </div>
