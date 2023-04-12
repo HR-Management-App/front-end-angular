@@ -4,18 +4,25 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from '../app.component';
 import { ApplicationFormComponent } from '../application-form/application-form.component';
 import { UserHomePageComponent } from '../user-home-page/user-home-page.component';
+import { UserDocListComponent } from '../user-doc-list/user-doc-list.component';
+import { UserHousingComponent } from '../user-housing/user-housing.component';
+import { UserProfileComponent } from '../user-profile/user-profile.component';
 
 const routes: Routes = [
-  { path: '', component: AppComponent },
+  { path: '', component: UserHomePageComponent },
   { path: 'application', component: ApplicationFormComponent },
-  { path: 'user-home', component: UserHomePageComponent }
+  { path: 'user-home', component: UserHomePageComponent },
+  { path: 'user-doc-list', component: UserDocListComponent },
+  { path: 'user-housing', component: UserHousingComponent },
+  { path: 'user-profile', component: UserProfileComponent },
+
   // {
   //   path: 'login',
   //   component: ProtectedCompComponent,
   //   canActivate: [AuthGuardService],
   // },
   // "Catch all" route must be last!
-  // { path: '**', component: NotFoundComponent },
+  // { path: '**', component: UserHomePageComponent },
 ];
 
 @NgModule({

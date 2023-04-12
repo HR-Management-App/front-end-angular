@@ -1,0 +1,15 @@
+<app-user-nav-bar></app-user-nav-bar>
+<h2>My Documents</h2>
+
+<form>
+    <div>
+        <label><strong>Visa</strong></label><br>
+        <input [(ngModel)]="visaFile" [ngModelOptions]="{standalone: true}" size="30" disabled>
+        <button (click)="downloadVisa()">Download</button>
+    </div>
+    <div>
+        <label><strong>Driver License</strong></label><br>
+        <input [(ngModel)]="driverFile" [ngModelOptions]="{standalone: true}" size="30" disabled>
+        <button (click)="downloadDriver()">Download</button>
+    </div>
+</form>

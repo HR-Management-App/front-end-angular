@@ -10,26 +10,19 @@ export class ApplicationService {
     constructor(private httpClient: HttpClient) { }
 
     run(): Observable<string> {
-        console.log('hehe');
         const headers = new HttpHeaders()
             .set('Authorization', 'Bearer ' + sessionStorage.getItem('token'))
 
         return this.httpClient.get<string>('http://localhost:8080/composite/status', { 'headers': headers });
     }
 
-    // getData() {
-    //     return this.http.get('http://localhost:8080/composite/status');
-    // }
+    getEmployeeID(user_id: number): Observable<string> {
+        const headers = new HttpHeaders()
+            .set('Authorization', 'Bearer ' + sessionStorage.getItem('token'))
 
-    // subject = new Subject();
+        return this.httpClient.get<string>('http://localhost:8080/composite/' + user_id, { 'headers': headers });
+    }
 
-    // onSubscribe() {
-    //     return this.subject.asObservable();
-    // }
-
-    // // public getApplication(): Observable<Application> {
-    // //     return this.http.get<Application>('http://localhost:8080/composite/app');
-    // // }
 
 
 }

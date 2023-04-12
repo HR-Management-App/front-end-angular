@@ -1,16 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { emptyValidator } from '../services/empty.validator';
-import { FileDetails } from '../domain/file-details.model';
-import { FileUploadService } from '../services/file.upload.service';
-import { UploadResponse } from '../response/upload-response.model';
 import { Employee } from '../domain/EmployeeService/employee';
 import { Contact } from '../domain/EmployeeService/contact';
 import { Visa } from '../domain/EmployeeService/visa';
 import { Address } from '../domain/EmployeeService/address';
 import { PersonalDocument } from '../domain/EmployeeService/personal.document';
-import { EmployeeInfoUploadService } from '../services/employee.info.upload.service';
 import { Router } from '@angular/router';
+import { EmployeeService } from '../services/employee.service';
 
 @Component({
   selector: 'app-application-form',
@@ -19,9 +16,7 @@ import { Router } from '@angular/router';
 })
 export class ApplicationFormComponent implements OnInit {
 
-  constructor(private fileUploadService: FileUploadService,
-    private infoUploadService: EmployeeInfoUploadService,
-    private _router: Router) { }
+  constructor(private service: EmployeeService, private _router: Router) { }
 
   ngOnInit(): void {
     // throw new Error('Method not implemented.');
@@ -176,13 +171,13 @@ export class ApplicationFormComponent implements OnInit {
       docList
     );
 
-    this.fileUploadService.upload(this.visaFile, 'visa/' + user_id).subscribe({
+    this.service.upload(this.visaFile, 'visa/' + user_id).subscribe({
       next: (visa_data) => {
         console.log("uploaded" + JSON.stringify(visa_data));
         let json = JSON.stringify(visa_data);
         let obj = JSON.parse(json);
         visaDoc.path = obj.filename;
-        this.fileUploadService.upload(this.driverFile, 'driver_license/' + user_id).subscribe({
+        this.service.upload(this.driverFile, 'driver_license/' + user_id).subscribe({
           next: (driver_data) => {
             console.log("uploaded" + JSON.stringify(driver_data));
             let json = JSON.stringify(driver_data);
@@ -191,7 +186,7 @@ export class ApplicationFormComponent implements OnInit {
             driverDoc.path = obj.filename;
             docList.push(visaDoc);
             docList.push(driverDoc);
-            this.infoUploadService.uploadEmployeeToDb(employee).subscribe({
+            this.service.uploadEmployeeToDb(employee).subscribe({
               next: (data) => {
                 console.log("uploaded" + JSON.stringify(data));
                 let json = JSON.stringify(data);
