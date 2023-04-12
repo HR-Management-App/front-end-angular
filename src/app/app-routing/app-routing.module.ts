@@ -7,6 +7,10 @@ import { UserHomePageComponent } from '../user-home-page/user-home-page.componen
 import { UserDocListComponent } from '../user-doc-list/user-doc-list.component';
 import { UserHousingComponent } from '../user-housing/user-housing.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
+import { AuthLoginComponent } from '../auth-login/auth-login.component';
+import { AuthRegistrationComponent } from '../auth-registration/auth-registration.component';
+import { AuthRegistrationTokenComponent } from '../auth-registrationToken/auth-registrationToken.component';
+
 
 const routes: Routes = [
   { path: '', component: UserHomePageComponent },
@@ -15,7 +19,9 @@ const routes: Routes = [
   { path: 'user-doc-list', component: UserDocListComponent },
   { path: 'user-housing', component: UserHousingComponent },
   { path: 'user-profile', component: UserProfileComponent },
-
+  { path: 'auth-login', component : AuthLoginComponent },
+  { path: 'auth-registration', component : AuthRegistrationComponent},
+  { path:'auth-registrationToken', component : AuthRegistrationTokenComponent}
   // {
   //   path: 'login',
   //   component: ProtectedCompComponent,
