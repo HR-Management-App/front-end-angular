@@ -11,10 +11,10 @@ import { UserHousingComponent } from './user-housing/user-housing.component';
 import { UserNavBarComponent } from './user-nav-bar/user-nav-bar.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RouterModule } from '@angular/router';
-
 import { AuthLoginComponent } from './auth-login/auth-login.component';
 import { AuthRegistrationComponent } from './auth-registration/auth-registration.component';
 import { AuthRegistrationTokenComponent } from './auth-registrationToken/auth-registrationToken.component';
+
 
 @NgModule({
   declarations: [
@@ -40,4 +40,5 @@ import { AuthRegistrationTokenComponent } from './auth-registrationToken/auth-re
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

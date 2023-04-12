@@ -1,2 +1,66 @@
 <app-user-nav-bar></app-user-nav-bar>
-<p>user-profile works!</p>
+<h2>My Profile</h2>
+
+<form [formGroup]="fBuilder">
+    <div>
+        <label><strong>First Name</strong></label>
+        <input type="text" formControlName="first_name" disabled>
+    </div>
+    <div>
+        <label><strong>Middle Name</strong></label>
+        <input type="text" placeholder="Middle Name" formControlName="middle_name" disabled="">
+    </div>
+    <div>
+        <label><strong>Last Name</strong></label>
+        <input type="text" placeholder="Last Name" formControlName="last_name" disabled="">
+    </div>
+    <div>
+        <label><strong>Preferred Name</strong></label>
+        <input type="text" placeholder="Preferred Name" formControlName="preferred_name" disabled="">
+    </div>
+    <div>
+        <label><strong>Date of Birth</strong></label>
+        <input type="text" placeholder="YYYY-MM-DD" formControlName="dob" disabled="">
+    </div>
+    <div>
+        <label><strong>Gender</strong></label>
+        <input id="male-option" placeholder="gender" value="male" formControlName="gender">
+    </div>
+
+    <h3>Address</h3>
+    <div>
+        <label><strong>Street</strong></label>
+        <input type="text" placeholder="Street" formControlName="street">
+    </div>
+    <div>
+        <label><strong>Building/Apt#</strong></label>
+        <input type="text" placeholder="Building/Apt#" formControlName="apt">
+    </div>
+    <div>
+        <label><strong>City</strong></label>
+        <input type="text" placeholder="City" formControlName="city">
+    </div>
+    <div>
+        <label><strong>State</strong></label>
+        <input type="text" placeholder="State" formControlName="state">
+    </div>
+    <div>
+        <label><strong>Zipcode</strong></label>
+        <input type="text" placeholder="Zipcode" formControlName="zipcode">
+    </div>
+    <div>
+        <label><strong>CellPhone</strong></label>
+        <input type="text" placeholder="Cellphone" formControlName="cellphone">
+    </div>
+    <div>
+        <label><strong>WorkPhone</strong></label>
+        <input type="text" placeholder="Workphone" formControlName="workphone">
+    </div>
+    <div>
+        <label><strong>Driver License #</strong></label>
+        <input type="text" placeholder="Driver License Number" formControlName="driver_lic_num">
+    </div>
+
+
+
+</form>
