@@ -13,7 +13,7 @@ export class UserProfileComponent implements OnInit {
   constructor(private service: EmployeeService) { }
 
   ngOnInit(): void {
-    this.service.getProfile(1).subscribe({
+    this.service.getProfile(Number(sessionStorage.getItem('emp_id'))).subscribe({
       next: (data) => {
         let json = JSON.stringify(data);
         let obj = JSON.parse(json);
