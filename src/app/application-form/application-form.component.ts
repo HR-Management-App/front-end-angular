@@ -21,6 +21,7 @@ export class ApplicationFormComponent implements OnInit {
 
   isLoaded: boolean = false;
 
+
   constructor(private service: EmployeeService,
     private _router: Router,
     private appService: ApplicationService) { }
@@ -49,6 +50,7 @@ export class ApplicationFormComponent implements OnInit {
       },
     });
     this.isLoaded = true;
+
   }
 
   citizen_options = [
