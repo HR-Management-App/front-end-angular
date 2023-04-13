@@ -19,9 +19,6 @@ export class AuthLoginComponent implements OnInit {
     private _router: Router) { }
 
   ngOnInit(): void {
-    sessionStorage.clear();
-    // need an alert here if the user is previously logged in
-    // todo
   }
 
   credentials: LoginCredentials = {
@@ -32,16 +29,22 @@ export class AuthLoginComponent implements OnInit {
   onSubmit(): void {
     this.service.userValidation(this.credentials).subscribe({
       next: (data) => {
+        if (sessionStorage.getItem('user_id') != null) {
+          sessionStorage.clear();
+          alert("previosly signed in account is forced logged out")
+        }
         console.log(JSON.stringify(data));
         let json = JSON.stringify(data);
         alert(JSON.parse(json).message);
         let token = JSON.parse(json).data;
         let jwt_token = JSON.parse(token).jwt_token;
-        let user_id = JSON.parse(token).user_id;
         console.log("jwt token: " + jwt_token);
-        sessionStorage.setItem('token', jwt_token);
-        console.log("user_id: " + user_id);
-        sessionStorage.setItem('user_id', user_id);
+        if (jwt_token != null) {
+          sessionStorage.setItem('token', jwt_token);
+          let user_id = JSON.parse(token).user_id;
+          console.log("user_id: " + user_id);
+          sessionStorage.setItem('user_id', user_id);
+        }
       },
       complete: () => {
         if (sessionStorage.getItem('user_id') != null) {
