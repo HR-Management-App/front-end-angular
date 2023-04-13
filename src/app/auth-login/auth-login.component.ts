@@ -19,7 +19,13 @@ export class AuthLoginComponent implements OnInit {
     private _router: Router) { }
 
   ngOnInit(): void {
-    // throw new Error('Method not implemented.');
+    if (sessionStorage.getItem('token')) { //already logged in
+      if (sessionStorage.getItem('role') == 'user') {
+        this._router.navigate(['/user-home']);
+      } else {
+        this._router.navigate(['/admin-home']);
+      }
+    }
   }
 
   credentials: LoginCredentials = {
@@ -44,9 +50,12 @@ export class AuthLoginComponent implements OnInit {
       complete: () => {
         if (sessionStorage.getItem('user_id') != null) {
           if (sessionStorage.getItem('user_id') == '1') {
+            sessionStorage.setItem('role', 'hr');
             this._router.navigate(['/admin-home']);
           } else {
-            this._router.navigate(['/user-home']);
+            // this._router.navigate(['/user-home']);
+            this._router.navigate(['/user-nav-bar']);
+            sessionStorage.setItem('role', 'user');
           }
         }
       },
@@ -54,5 +63,10 @@ export class AuthLoginComponent implements OnInit {
         console.log(e);
       }
     });
+
+
+
   }
+
+  // const token = sessionStorage.ge
 }

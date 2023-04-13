@@ -1,13 +1,40 @@
-<div class="topnav">
-    <a *ngIf="application == 'approved'" routerLink="/user-home">Home</a>
-    <a *ngIf="application == 'approved'" routerLink="/user-profile">Profile</a>
-    <a *ngIf="application == 'approved'" routerLink="/user-housing">Housing</a>
-    <a *ngIf="application != 'never submitted'" routerLink="/user-doc-list">Documents</a>
-
-    <!-- <a routerLink="/user-home">Home</a>
+<!-- <div class="topnav">
+    <a routerLink="/user-home">Home</a>
     <a routerLink="/user-profile">Profile</a>
     <a routerLink="/user-housing">Housing</a>
-    <a routerLink="/user-doc-list">Documents</a> -->
+    <a routerLink="/user-doc-list">Documents</a>
 </div>
 
-<router-outlet></router-outlet>
+<router-outlet></router-outlet> -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a *ngIf="application == 'approved'" routerLink="/user-home" routerLinkActive="active"
+                        class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a *ngIf="application == 'approved'" routerLink="/user-profile" class="nav-link">Profile</a>
+
+                </li>
+                <li class="nav-item">
+                    <a *ngIf="application == 'approved'" routerLink="/user-housing" class="nav-link">Housing</a>
+
+                </li>
+                <li class="nav-item">
+                    <a *ngIf="application != 'never submitted'" routerLink="/user-doc-list" routerLinkActive="active"
+                        class="nav-link">Documents</a>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- <router-outlet></router-outlet> -->

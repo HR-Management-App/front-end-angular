@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { employeeProfile } from 'src/app/domain/EmployeeService/employeeProfile';
+import { employeeProfile } from 'app/domain/EmployeeService/employeeProfile';
+
 @Component({
   selector: 'app-employees-profile',
   templateUrl: './employees-profile.component.html',
@@ -9,7 +10,7 @@ import { employeeProfile } from 'src/app/domain/EmployeeService/employeeProfile'
 })
 export class EmployeesProfileComponent {
   employee: employeeProfile;
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient) { }
   ngOnInit() {
     this.route.params.subscribe((params) => {
       const id = params['id'];

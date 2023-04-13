@@ -19,18 +19,25 @@ export class UserHomePageComponent implements OnInit {
           console.log(JSON.stringify(data));
           let json = JSON.stringify(data);
           this.application = JSON.parse(json).status;
+          sessionStorage.setItem('app_status', JSON.parse(json).status);
         },
         complete: () => {
           if (this.application == 'never submitted') {
-            console.log('hehehe');
             this._router.navigate(['/application']);
+          } else {
+            this.applicationService.getEmployeeID(Number(sessionStorage.getItem('user_id'))).subscribe({
+              next: (data) => {
+                console.log(JSON.stringify(data));
+                let json = JSON.stringify(data);
+                sessionStorage.setItem('emp_id', JSON.parse(json).emp_id);
+              },
+            });
           }
         },
         error: (e) => {
           console.log(e);
         }
       });
-
 
   }
 

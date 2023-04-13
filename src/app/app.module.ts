@@ -23,6 +23,7 @@ import { RouterModule } from '@angular/router';
 import { AuthLoginComponent } from './auth-login/auth-login.component';
 import { AuthRegistrationComponent } from './auth-registration/auth-registration.component';
 import { AuthRegistrationTokenComponent } from './auth-registrationToken/auth-registrationToken.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 
 
@@ -55,7 +56,7 @@ import { AuthRegistrationTokenComponent } from './auth-registrationToken/auth-re
     AppRoutingModule,
     RouterModule
   ],
-  providers: [],
+  providers: [AuthGuardService],
   bootstrap: [AppComponent]
 })
 
