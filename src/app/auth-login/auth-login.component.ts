@@ -19,7 +19,9 @@ export class AuthLoginComponent implements OnInit {
     private _router: Router) { }
 
   ngOnInit(): void {
-    // throw new Error('Method not implemented.');
+    sessionStorage.clear();
+    // need an alert here if the user is previously logged in
+    // todo
   }
 
   credentials: LoginCredentials = {
@@ -28,11 +30,11 @@ export class AuthLoginComponent implements OnInit {
   };
 
   onSubmit(): void {
-    // sessionStorage.clear(); // for test
     this.service.userValidation(this.credentials).subscribe({
       next: (data) => {
         console.log(JSON.stringify(data));
         let json = JSON.stringify(data);
+        alert(JSON.parse(json).message);
         let token = JSON.parse(json).data;
         let jwt_token = JSON.parse(token).jwt_token;
         let user_id = JSON.parse(token).user_id;
@@ -52,6 +54,8 @@ export class AuthLoginComponent implements OnInit {
       },
       error: (e) => {
         console.log(e);
+        let json = JSON.stringify(e);
+        alert(JSON.parse(json).message);
       }
     });
   }

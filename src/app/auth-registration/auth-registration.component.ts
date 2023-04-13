@@ -17,8 +17,8 @@ export class AuthRegistrationComponent implements OnInit {
   registrationToken: string;
 
   constructor(private service: AuthenticationService,
-    private _router: ActivatedRoute,
-    private appService: ApplicationService) { }
+    private _router: ActivatedRoute
+    ) { } //private appService: ApplicationService
 
   ngOnInit(): void {
     console.log("Goes to ngOnInit");
@@ -47,10 +47,12 @@ export class AuthRegistrationComponent implements OnInit {
       next: (data) => {
         console.log(JSON.stringify(data));
         let json = JSON.stringify(data);
-        this.appService = JSON.parse(json).status;
+        alert(JSON.parse(json).message);
       },
       error: (e) => {
         console.log(e);
+        let json = JSON.stringify(e);
+        alert(JSON.parse(json).message);
       }
     });
   }

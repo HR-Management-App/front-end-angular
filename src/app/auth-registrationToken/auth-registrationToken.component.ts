@@ -17,8 +17,8 @@ export class AuthRegistrationTokenComponent implements OnInit {
   isLoaded: boolean = false;
 
   constructor(private service: AuthenticationService,
-    private _router: ActivatedRoute,
-    private appService: ApplicationService) { }
+    private _router: ActivatedRoute
+    ) { } //private appService: ApplicationService
 
   ngOnInit(): void {
 
@@ -42,10 +42,13 @@ export class AuthRegistrationTokenComponent implements OnInit {
       next: (data) => {
         console.log(JSON.stringify(data));
         let json = JSON.stringify(data);
-        this.appService = JSON.parse(json).status;
+        // this.appService = JSON.parse(json).status;
+        alert(JSON.parse(json).message);
       },
       error: (e) => {
         console.log(e);
+        let json = JSON.stringify(e);
+        alert(JSON.parse(json).message);
       }
     });
   }
