@@ -14,21 +14,106 @@ import { HomeComponent } from '../hr/home/home.component';
 import { EmployeesPanelComponent } from '../hr/employees-panel/employees-panel.component';
 import { HiringPanelComponent } from '../hr/hiring-panel/hiring-panel.component';
 import { EmployeesProfileComponent } from '../hr/employees-profile/employees-profile.component';
+import { UserNavBarComponent } from 'app/user-nav-bar/user-nav-bar.component';
+import { AuthGuardService } from 'app/services/auth-guard.service';
 
 const routes: Routes = [
-  { path: '', component: AuthLoginComponent },
-  { path: 'application', component: ApplicationFormComponent },
-  { path: 'user-home', component: UserHomePageComponent },
-  { path: 'user-doc-list', component: UserDocListComponent },
-  { path: 'user-housing', component: UserHousingComponent },
-  { path: 'user-profile', component: UserProfileComponent },
-  { path: 'auth-login', component : AuthLoginComponent },
+
+  {
+    path: '', component: AuthLoginComponent,
+  },
+  {
+    path: 'application',
+    component: ApplicationFormComponent,
+    canActivate: [AuthGuardService],
+    data: {
+      allowedRoles: ['user']
+    }
+  },
+  {
+    path: 'user-home',
+    component: UserHomePageComponent,
+    // component: UserNavBarComponent,
+    canActivate: [AuthGuardService],
+    data: {
+      allowedRoles: ['user']
+    }
+  },
+  {
+    path: 'user-doc-list',
+    component: UserDocListComponent,
+    canActivate: [AuthGuardService],
+    data: {
+      allowedRoles: ['user']
+    }
+  },
+  {
+    path: 'user-housing',
+    component: UserHousingComponent,
+    canActivate: [AuthGuardService],
+    data: {
+      allowedRoles: ['user']
+    }
+  },
+  {
+    path: 'user-profile',
+    component: UserProfileComponent,
+    canActivate: [AuthGuardService],
+    data: {
+      allowedRoles: ['user']
+    }
+  },
   { path: 'auth-registration/:registrationToken', component : AuthRegistrationComponent},
-  { path: 'auth-registrationToken', component: AuthRegistrationTokenComponent },
-  { path: 'admin-home', component: HomeComponent },
-  { path: 'employees', component: EmployeesPanelComponent },
-  { path: 'hiring', component: HiringPanelComponent },
-  { path: 'profile/:id', component: EmployeesProfileComponent },
+  {
+    path: 'auth-registrationToken',
+    component: AuthRegistrationTokenComponent,
+    data: {
+      allowedRoles: ['hr']
+    }
+  },
+  {
+    path: 'admin-home',
+    component: HomeComponent,
+    canActivate: [AuthGuardService],
+    data: {
+      allowedRoles: ['hr']
+    }
+  },
+  {
+    path: 'employees',
+    component: EmployeesPanelComponent, data: {
+      allowedRoles: ['hr']
+    }
+  },
+  {
+    path: 'hiring',
+    component: HiringPanelComponent, data: {
+      allowedRoles: ['hr']
+    }
+  },
+  {
+    path: 'profile/:id', component: EmployeesProfileComponent, data: {
+      allowedRoles: ['hr']
+    }
+  },
+
+  // "Catch all" route must be last!
+  { path: '**', component: AuthLoginComponent },
+
+ // { path: '', component: AuthLoginComponent },
+ // { path: 'application', component: ApplicationFormComponent },
+ // { path: 'user-home', component: UserHomePageComponent },
+ // { path: 'user-doc-list', component: UserDocListComponent },
+ // { path: 'user-housing', component: UserHousingComponent },
+ // { path: 'user-profile', component: UserProfileComponent },
+ //{ path: 'auth-login', component : AuthLoginComponent },
+  //{ path: 'auth-registration/:registrationToken', component : AuthRegistrationComponent},
+  //{ path: 'auth-registrationToken', component: AuthRegistrationTokenComponent },
+ // { path: 'admin-home', component: HomeComponent },
+  //{ path: 'employees', component: EmployeesPanelComponent },
+//  { path: 'hiring', component: HiringPanelComponent },
+//  { path: 'profile/:id', component: EmployeesProfileComponent },
+
 ];
 
 @NgModule({

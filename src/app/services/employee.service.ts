@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Employee } from '../domain/EmployeeService/employee';
 import { UploadResponse } from '../response/upload-response.model';
 import { Observable, map } from 'rxjs';
+import { NewFilePathRequest } from 'app/domain/EmployeeService/request/newFilePathRequest';
 
 
 @Injectable({
@@ -53,5 +54,13 @@ export class EmployeeService {
     return this.httpClient.get<UploadResponse>(
       'http://localhost:8080/composite/' + emp_id + '/profile',
       { 'headers': headers });
+  }
+
+  updatePath(fileRequest: NewFilePathRequest) {
+    const body = JSON.stringify(fileRequest);
+    const headers = new HttpHeaders()
+      .set('Authorization', 'Bearer ' + sessionStorage.getItem('token'))
+      .set('content-type', 'application/json');
+    return this.httpClient.put<NewFilePathRequest>('http://localhost:8080/composite/updatePath', body, { 'headers': headers });
   }
 }

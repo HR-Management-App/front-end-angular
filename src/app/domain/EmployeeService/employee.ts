@@ -10,8 +10,8 @@ export class Employee {
     middleName: string;
     preferredName: string;
     email: string;
-    cellPhone: string;
-    alternatePhone: string;
+    cellPhoneNumber: string;
+    workPhoneNumber: string;
     gender: string;
     ssn: string;
     dob: Date;
@@ -53,8 +53,8 @@ export class Employee {
         this.middleName = middleName;
         this.preferredName = preferredName;
         this.email = email;
-        this.cellPhone = cellPhone;
-        this.alternatePhone = alternatePhone;
+        this.cellPhoneNumber = cellPhone;
+        this.workPhoneNumber = alternatePhone;
         this.gender = gender;
         this.ssn = ssn;
         this.dob = dob;
