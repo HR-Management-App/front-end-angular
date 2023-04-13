@@ -15,7 +15,6 @@ import { EmployeesPanelComponent } from '../hr/employees-panel/employees-panel.c
 import { HiringPanelComponent } from '../hr/hiring-panel/hiring-panel.component';
 import { EmployeesProfileComponent } from '../hr/employees-profile/employees-profile.component';
 
-
 const routes: Routes = [
   { path: '', component: AuthLoginComponent },
   { path: 'application', component: ApplicationFormComponent },
@@ -23,20 +22,13 @@ const routes: Routes = [
   { path: 'user-doc-list', component: UserDocListComponent },
   { path: 'user-housing', component: UserHousingComponent },
   { path: 'user-profile', component: UserProfileComponent },
-  { path: 'auth-registration', component: AuthRegistrationComponent },
+  { path: 'auth-login', component : AuthLoginComponent },
+  { path: 'auth-registration/:registrationToken', component : AuthRegistrationComponent},
   { path: 'auth-registrationToken', component: AuthRegistrationTokenComponent },
   { path: 'admin-home', component: HomeComponent },
   { path: 'employees', component: EmployeesPanelComponent },
   { path: 'hiring', component: HiringPanelComponent },
   { path: 'profile/:id', component: EmployeesProfileComponent },
-
-  // {
-  //   path: 'login',
-  //   component: ProtectedCompComponent,
-  //   canActivate: [AuthGuardService],
-  // },
-  // "Catch all" route must be last!
-  // { path: '**', component: UserHomePageComponent },
 ];
 
 @NgModule({

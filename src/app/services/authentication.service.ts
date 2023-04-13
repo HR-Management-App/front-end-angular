@@ -32,7 +32,7 @@ export class AuthenticationService {
       const body = JSON.stringify(signupRequest);
       const headers = new HttpHeaders().set('content-type', 'application/json');
 
-      return this.httpClient.post<AuthResponse>('http://localhost:7070/signup' + token, body, { 'headers': headers });
+      return this.httpClient.post<AuthResponse>('http://localhost:7070/signup/' + token, body, { 'headers': headers });
     }
 
     tokenGeneration(newTokenRequest : NewTokenRequest) : Observable<AuthResponse> {
