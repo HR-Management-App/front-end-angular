@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Form } from '@angular/forms';
-import { HrService } from 'src/app/services/hr.service';
+import { HrService } from 'app/services/hr.service';
 
 @Component({
   selector: 'app-employees-panel',
@@ -16,7 +16,7 @@ export class EmployeesPanelComponent {
   default_url = 'http://localhost:8010/employee-service/employees';
   url_prefix = 'http://localhost:8010/employee-service/summary?';
 
-  constructor(private http: HttpClient, private hrService: HrService) {}
+  constructor(private http: HttpClient, private hrService: HrService) { }
 
   ngOnInit() {
     const token =

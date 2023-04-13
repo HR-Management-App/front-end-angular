@@ -24,6 +24,7 @@ import { AuthLoginComponent } from './auth-login/auth-login.component';
 import { AuthRegistrationComponent } from './auth-registration/auth-registration.component';
 import { AuthRegistrationTokenComponent } from './auth-registrationToken/auth-registrationToken.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { SignOutComponent } from './sign-out/sign-out.component';
 
 
 
@@ -45,7 +46,8 @@ import { AuthGuardService } from './services/auth-guard.service';
     UserProfileComponent,
     AuthLoginComponent,
     AuthRegistrationComponent,
-    AuthRegistrationTokenComponent
+    AuthRegistrationTokenComponent,
+    SignOutComponent
 
   ],
   imports: [

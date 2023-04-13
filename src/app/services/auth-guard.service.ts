@@ -40,6 +40,7 @@ export class AuthGuardService implements CanActivate {
           return true;
         } else {
           alert('Forbidden');
+          this._router.navigate(["admin-home"]);
           return false;
         }
       }
