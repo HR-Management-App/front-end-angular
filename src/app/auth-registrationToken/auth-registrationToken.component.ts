@@ -43,6 +43,7 @@ export class AuthRegistrationTokenComponent implements OnInit {
         console.log(JSON.stringify(data));
         let json = JSON.stringify(data);
         this.appService = JSON.parse(json).status;
+        alert('Result for generating registration token is as follows: \n' + JSON.stringify(data));
       },
       error: (e) => {
         console.log(e);

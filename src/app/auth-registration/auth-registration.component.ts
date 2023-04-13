@@ -48,6 +48,7 @@ export class AuthRegistrationComponent implements OnInit {
         console.log(JSON.stringify(data));
         let json = JSON.stringify(data);
         this.appService = JSON.parse(json).status;
+        alert('Result for is as follows: \n' + JSON.stringify(data));
       },
       error: (e) => {
         console.log(e);
