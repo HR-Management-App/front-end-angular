@@ -1,0 +1,94 @@
+<app-nav-bar></app-nav-bar>
+<div class="d-flex align-items-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Profile</h5>
+                        <hr />
+                        <p class="card-text">
+                            <strong>First Name:</strong> {{ employee.firstName }}
+                        </p>
+                        <p class="card-text">
+                            <strong>Last Name:</strong> {{ employee.lastName }}
+                        </p>
+                        <p class="card-text">
+                            <strong>Middle Name:</strong> {{ employee.middleName }}
+                        </p>
+                        <p class="card-text">
+                            <strong>Preferred Name:</strong> {{ employee.preferredName }}
+                        </p>
+                        <p class="card-text">
+                            <strong>Social Security Number:</strong> {{ employee.ssn }}
+                        </p>
+                        <p class="card-text">
+                            <strong>Date of Birth:</strong> {{ employee.dob }}
+                        </p>
+                        <h5 class="card-title">Address</h5>
+                        <hr />
+                        <p class="card-text">
+                            <strong>Street</strong> {{ employee.currentAddress.addressLine1 }}
+                        </p>
+                        <p class="card-text">
+                            <strong>Apt/Unit</strong>
+                            {{ employee.currentAddress.addressLine2 }}
+                        </p>
+                        <p class="card-text">
+                            <strong>City</strong> {{ employee.currentAddress.city }}
+                        </p>
+                        <p class="card-text">
+                            <strong>State</strong> {{ employee.currentAddress.state }}
+                        </p>
+                        <p class="card-text">
+                            <strong>Zipcode</strong> {{ employee.currentAddress.zipcode }}
+                        </p>
+                        <h5 class="card-title">Contact</h5>
+                        <hr />
+                        <p class="card-text">
+                            <strong>Cell Phone</strong> {{ employee.cellPhoneNumber }}
+                        </p>
+                        <p class="card-text">
+                            <strong>Work Phone</strong> {{ employee.workPhoneNumber }}
+                        </p>
+                        <h5 class="card-title">Visa</h5>
+                        <hr />
+                        <p class="card-text">
+                            <strong>Visa Type</strong> {{ employee.visaStatus.visaType }}
+                        </p>
+                        <p class="card-text">
+                            <strong>Start Date</strong> {{ employee.visaStatus.startDate }}
+                        </p>
+                        <p class="card-text">
+                            <strong>End Date</strong> {{ employee.visaStatus.endDate }}
+                        </p>
+                        <h5 class="card-title">Emergency Contact</h5>
+                        <hr />
+                        <div *ngFor="let contact of employee.contactList">
+                            <p class="card-text">
+                                <strong>First Name</strong> {{ contact.firstName }}
+                            </p>
+                            <p class="card-text">
+                                <strong>Last Name</strong> {{ contact.lastName }}
+                            </p>
+                            <p class="card-text">
+                                <strong>Middle Name</strong> {{ contact.middleName }}
+                            </p>
+                            <p class="card-text">
+                                <strong>Phone Number</strong> {{ contact.cellPhone }}
+                            </p>
+                            <p class="card-text">
+                                <strong>Email</strong> {{ contact.email }}
+                            </p>
+                            <p class="card-text">
+                                <strong>Relationship</strong> {{ contact.relationship }}
+                            </p>
+                            
+                            <hr />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -39,13 +39,19 @@ export class EmployeeService {
     );
   }
 
-
-
   getDocumentPath(emp_id: string, title: string): Observable<UploadResponse> {
     const headers = new HttpHeaders()
       .set('Authorization', 'Bearer ' + sessionStorage.getItem('token'))
     return this.httpClient.get<UploadResponse>(
       'http://localhost:8080/composite/document?emp_id=' + emp_id + '&title=' + title,
+      { 'headers': headers });
+  }
+
+  getProfile(emp_id: number): Observable<any> {
+    const headers = new HttpHeaders()
+      .set('Authorization', 'Bearer ' + sessionStorage.getItem('token'))
+    return this.httpClient.get<UploadResponse>(
+      'http://localhost:8080/composite/' + emp_id + '/profile',
       { 'headers': headers });
   }
 }

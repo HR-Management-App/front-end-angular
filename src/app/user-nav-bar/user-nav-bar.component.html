@@ -3,4 +3,11 @@
     <a *ngIf="application == 'approved'" routerLink="/user-profile">Profile</a>
     <a *ngIf="application == 'approved'" routerLink="/user-housing">Housing</a>
     <a *ngIf="application != 'never submitted'" routerLink="/user-doc-list">Documents</a>
+
+    <!-- <a routerLink="/user-home">Home</a>
+    <a routerLink="/user-profile">Profile</a>
+    <a routerLink="/user-housing">Housing</a>
+    <a routerLink="/user-doc-list">Documents</a> -->
 </div>
+
+<router-outlet></router-outlet>

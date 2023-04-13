@@ -1,0 +1,25 @@
+.parent-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+table {
+    border-collapse: collapse;
+    margin: auto;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+}
+
+h5 {
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+.container{
+    padding: 5px;
+    
+}

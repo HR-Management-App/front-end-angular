@@ -1,0 +1,81 @@
+<app-nav-bar></app-nav-bar>
+<!-- search bar -->
+<!-- <div class="container">
+  <div class="row justify-content-center">
+    <div class="col-sm-6">
+      <form class="form-inline d-flex">
+        <input
+          class="form-control mr-sm-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+          Search
+        </button>
+      </form>
+    </div>
+  </div>
+</div> -->
+<div class="container mt-5">
+  <form (ngSubmit)="onSubmit()">
+  <div class="form-group d-flex justify-content-center">
+    <div class="btn-group-toggle ml-sm-2" data-toggle="buttons">
+    <label class="btn btn-primary mr-sm-2">
+      <input
+        type="radio"
+        name="searchType"
+        [(ngModel)]="searchType"
+        value="email"
+      />
+      Email
+    </label>
+    <label class="btn btn-primary">
+      <input
+        type="radio"
+        name="searchType"
+        [(ngModel)]="searchType"
+        value="fullname"
+      />
+      Full Name
+    </label>
+    
+  </div>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" id="searchInput" [(ngModel)]="searchTerm" name="searchTerm" placeholder="{{searchType === 'email' ? 'Search by email' : 'Search by full name'}}">
+    </div>
+    <div class="col-sm-3">
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  </div>
+</form>
+</div>
+
+<!-- table -->
+<div class="container">
+  <h5>Results</h5>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>SSN</th>
+        <th>Work Authorization</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees">
+        <td>
+          <a [routerLink]="['/profile', employee.employeeId]">{{
+            employee.fullName
+          }}</a>
+        </td>
+        <td>{{ employee.ssn }}</td>
+        <td>{{ employee.workAuthorization }}</td>
+        <td>{{ employee.phoneNumber }}</td>
+        <td>{{ employee.email }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

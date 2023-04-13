@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApplicationService } from '../services/application.service';
 import { AuthenticationService } from '../services/authentication.service';
 
 interface LoginCredentials {
@@ -17,8 +16,7 @@ export class AuthLoginComponent implements OnInit {
 
 
   constructor(private service: AuthenticationService,
-    private _router: Router,
-    private appService: ApplicationService) { }
+    private _router: Router) { }
 
   ngOnInit(): void {
     // throw new Error('Method not implemented.');
@@ -31,7 +29,7 @@ export class AuthLoginComponent implements OnInit {
 
   onSubmit(): void {
     // sessionStorage.clear(); // for test
-    this.service.userValidation(this.credentials).subscribe( {
+    this.service.userValidation(this.credentials).subscribe({
       next: (data) => {
         console.log(JSON.stringify(data));
         let json = JSON.stringify(data);
@@ -42,6 +40,15 @@ export class AuthLoginComponent implements OnInit {
         sessionStorage.setItem('token', jwt_token);
         console.log("user_id: " + user_id);
         sessionStorage.setItem('user_id', user_id);
+      },
+      complete: () => {
+        if (sessionStorage.getItem('user_id') != null) {
+          if (sessionStorage.getItem('user_id') == '1') {
+            this._router.navigate(['/admin-home']);
+          } else {
+            this._router.navigate(['/user-home']);
+          }
+        }
       },
       error: (e) => {
         console.log(e);
