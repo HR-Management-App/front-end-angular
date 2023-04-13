@@ -11,7 +11,6 @@ import { AuthLoginComponent } from '../auth-login/auth-login.component';
 import { AuthRegistrationComponent } from '../auth-registration/auth-registration.component';
 import { AuthRegistrationTokenComponent } from '../auth-registrationToken/auth-registrationToken.component';
 
-
 const routes: Routes = [
   { path: '', component: UserHomePageComponent },
   { path: 'application', component: ApplicationFormComponent },
@@ -20,15 +19,8 @@ const routes: Routes = [
   { path: 'user-housing', component: UserHousingComponent },
   { path: 'user-profile', component: UserProfileComponent },
   { path: 'auth-login', component : AuthLoginComponent },
-  { path: 'auth-registration', component : AuthRegistrationComponent},
-  { path:'auth-registrationToken', component : AuthRegistrationTokenComponent}
-  // {
-  //   path: 'login',
-  //   component: ProtectedCompComponent,
-  //   canActivate: [AuthGuardService],
-  // },
-  // "Catch all" route must be last!
-  // { path: '**', component: UserHomePageComponent },
+  { path: 'auth-registration/:registrationToken', component : AuthRegistrationComponent},
+  { path: 'auth-registrationToken', component : AuthRegistrationTokenComponent}
 ];
 
 @NgModule({
