@@ -17,8 +17,8 @@ import { EmployeesProfileComponent } from '../hr/employees-profile/employees-pro
 import { UserNavBarComponent } from 'app/user-nav-bar/user-nav-bar.component';
 import { AuthGuardService } from 'app/services/auth-guard.service';
 
-
 const routes: Routes = [
+
   {
     path: '', component: AuthLoginComponent,
   },
@@ -63,7 +63,7 @@ const routes: Routes = [
       allowedRoles: ['user']
     }
   },
-  { path: 'auth-registration', component: AuthRegistrationComponent, },
+  { path: 'auth-registration/:registrationToken', component : AuthRegistrationComponent},
   {
     path: 'auth-registrationToken',
     component: AuthRegistrationTokenComponent,
@@ -99,6 +99,21 @@ const routes: Routes = [
 
   // "Catch all" route must be last!
   { path: '**', component: AuthLoginComponent },
+
+ // { path: '', component: AuthLoginComponent },
+ // { path: 'application', component: ApplicationFormComponent },
+ // { path: 'user-home', component: UserHomePageComponent },
+ // { path: 'user-doc-list', component: UserDocListComponent },
+ // { path: 'user-housing', component: UserHousingComponent },
+ // { path: 'user-profile', component: UserProfileComponent },
+ //{ path: 'auth-login', component : AuthLoginComponent },
+  //{ path: 'auth-registration/:registrationToken', component : AuthRegistrationComponent},
+  //{ path: 'auth-registrationToken', component: AuthRegistrationTokenComponent },
+ // { path: 'admin-home', component: HomeComponent },
+  //{ path: 'employees', component: EmployeesPanelComponent },
+//  { path: 'hiring', component: HiringPanelComponent },
+//  { path: 'profile/:id', component: EmployeesProfileComponent },
+
 ];
 
 @NgModule({

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Form } from '@angular/forms';
+import { HrService } from 'src/app/services/hr.service';
 
 @Component({
   selector: 'app-employees-panel',
@@ -8,7 +10,13 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 })
 export class EmployeesPanelComponent {
   employees: any[] = [];
-  constructor(private http: HttpClient) {}
+  searchType: string = 'email';
+  searchTerm: string = '';
+
+  default_url = 'http://localhost:8010/employee-service/employees';
+  url_prefix = 'http://localhost:8010/employee-service/summary?';
+
+  constructor(private http: HttpClient, private hrService: HrService) {}
 
   ngOnInit() {
     const token =
@@ -21,12 +29,38 @@ export class EmployeesPanelComponent {
     console.log('header' + authorization.get('Authorization'));
 
     this.http
-      .get<any[]>('http://localhost:8010/employee-service/employees', {
+      .get<any[]>(this.default_url, {
         headers: authorization,
       })
       .subscribe((res) => {
         this.employees = res;
         console.log(res);
       });
+  }
+
+  onSubmit() {
+    console.log('Search type:', this.searchType);
+    console.log('Search term:', this.searchTerm);
+    this.getEmployeeSummary(this.searchTerm, this.searchType);
+    // Perform search logic here
+  }
+
+  getEmployeeSummary(input: string, searchType: string): void {
+    let url: string = '';
+    if (input == '') {
+      url = this.default_url;
+    } else {
+      if (searchType == 'email') {
+        url = this.url_prefix + 'email=' + input;
+      } else {
+        //by name
+        url = this.url_prefix + 'name=' + input;
+      }
+    }
+    console.log('url ' + url);
+    this.hrService.getEmployeeProfile(url).subscribe((res) => {
+      this.employees = res;
+      console.log(res);
+    });
   }
 }

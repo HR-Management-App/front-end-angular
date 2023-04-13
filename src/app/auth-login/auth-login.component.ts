@@ -26,6 +26,7 @@ export class AuthLoginComponent implements OnInit {
         this._router.navigate(['/admin-home']);
       }
     }
+
   }
 
   credentials: LoginCredentials = {
@@ -34,18 +35,24 @@ export class AuthLoginComponent implements OnInit {
   };
 
   onSubmit(): void {
-    // sessionStorage.clear(); // for test
     this.service.userValidation(this.credentials).subscribe({
       next: (data) => {
+        if (sessionStorage.getItem('user_id') != null) {
+          sessionStorage.clear();
+          alert("previosly signed in account is forced logged out")
+        }
         console.log(JSON.stringify(data));
         let json = JSON.stringify(data);
+        alert(JSON.parse(json).message);
         let token = JSON.parse(json).data;
         let jwt_token = JSON.parse(token).jwt_token;
-        let user_id = JSON.parse(token).user_id;
         console.log("jwt token: " + jwt_token);
-        sessionStorage.setItem('token', jwt_token);
-        console.log("user_id: " + user_id);
-        sessionStorage.setItem('user_id', user_id);
+        if (jwt_token != null) {
+          sessionStorage.setItem('token', jwt_token);
+          let user_id = JSON.parse(token).user_id;
+          console.log("user_id: " + user_id);
+          sessionStorage.setItem('user_id', user_id);
+        }
       },
       complete: () => {
         if (sessionStorage.getItem('user_id') != null) {
@@ -61,6 +68,8 @@ export class AuthLoginComponent implements OnInit {
       },
       error: (e) => {
         console.log(e);
+        let json = JSON.stringify(e);
+        alert(JSON.parse(json).message);
       }
     });
 

@@ -8,7 +8,7 @@ import { emptyValidator } from '../services/empty.validator';
 import { SignupRequest } from '../domain/Authentication/singupRequest';
 
 @Component({
-  selector: 'auth-registration',
+  selector: 'auth-registration/:registrationToken',
   templateUrl: './auth-registration.component.html',
   styleUrls: ['./auth-registration.component.css']
 })
@@ -17,18 +17,17 @@ export class AuthRegistrationComponent implements OnInit {
   registrationToken: string;
 
   constructor(private service: AuthenticationService,
-    private _router: ActivatedRoute,
-    private appService: ApplicationService) { }
+    private _router: ActivatedRoute
+    ) { } //private appService: ApplicationService
 
   ngOnInit(): void {
-    // this.isLoaded = false;
-
-    // this._router = [{ path: 'signup/:registrationToken', component: AuthRegistrationComponent }];
-
-    this._router.params.subscribe(params => {
-      this.registrationToken = params.get('token');
-      console.log("Registration Token: " + this.registrationToken);
+    console.log("Goes to ngOnInit");
+    this._router.params.subscribe( params => {
+      console.log(params);
+      let json = JSON.stringify(params);
+      this.registrationToken = JSON.parse(json).registrationToken;
     });
+    console.log("this.registrationToken is: " + this.registrationToken);
   }
 
   fBuilder = new FormBuilder().group({
@@ -48,10 +47,12 @@ export class AuthRegistrationComponent implements OnInit {
       next: (data) => {
         console.log(JSON.stringify(data));
         let json = JSON.stringify(data);
-        this.appService = JSON.parse(json).status;
+        alert(JSON.parse(json).message);
       },
       error: (e) => {
         console.log(e);
+        let json = JSON.stringify(e);
+        alert(JSON.parse(json).message);
       }
     });
   }
