@@ -16,10 +16,11 @@ export class UserHomePageComponent implements OnInit {
     this.applicationService.run()
       .subscribe({
         next: (data) => {
-          console.log(JSON.stringify(data));
           let json = JSON.stringify(data);
           this.application = JSON.parse(json).status;
           sessionStorage.setItem('app_status', JSON.parse(json).status);
+          this.comment = JSON.parse(json).comment;
+          console.log(this.application);
         },
         complete: () => {
           if (this.application == 'never submitted') {
@@ -27,7 +28,6 @@ export class UserHomePageComponent implements OnInit {
           } else {
             this.applicationService.getEmployeeID(Number(sessionStorage.getItem('user_id'))).subscribe({
               next: (data) => {
-                console.log(JSON.stringify(data));
                 let json = JSON.stringify(data);
                 sessionStorage.setItem('emp_id', JSON.parse(json).emp_id);
               },
@@ -42,6 +42,7 @@ export class UserHomePageComponent implements OnInit {
   }
 
   application = '';
+  comment = '';
 }
 
 

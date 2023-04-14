@@ -270,6 +270,7 @@ export class ApplicationFormComponent implements OnInit {
                           alert("Updated application form for employee#" + obj.emp_id + " application#" + obj.app_id);
                         },
                         complete: () => {
+                          sessionStorage.setItem('app_status', 'never submitted');
                           this._router.navigate(['/user-home']);
                         },
                         error: (e) => {

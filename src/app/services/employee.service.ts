@@ -63,4 +63,14 @@ export class EmployeeService {
       .set('content-type', 'application/json');
     return this.httpClient.put<NewFilePathRequest>('http://localhost:8080/composite/updatePath', body, { 'headers': headers });
   }
+
+  getActiveFlag(type: string): Observable<Boolean> {
+    let emp_id = sessionStorage.getItem('emp_id');
+    const headers = new HttpHeaders()
+      .set('Authorization', 'Bearer ' + sessionStorage.getItem('token'))
+    return this.httpClient.get<Boolean>(
+      'http://localhost:8080/composite/getActiveFlag?emp_id=' + emp_id + '&type=' + type,
+      { 'headers': headers });
+
+  }
 }

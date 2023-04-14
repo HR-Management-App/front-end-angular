@@ -16,7 +16,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a *ngIf="application == 'approved'" routerLink="/user-home" routerLinkActive="active"
+                    <a *ngIf="application != 'never submitted'" routerLink="/user-home" routerLinkActive="active"
                         class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
@@ -30,6 +30,11 @@
                 <li class="nav-item">
                     <a *ngIf="application != 'never submitted'" routerLink="/user-doc-list" routerLinkActive="active"
                         class="nav-link">Documents</a>
+
+                </li>
+                <li class="nav-item">
+                    <a *ngIf="application == 'approved'" routerLink="/user-visa" routerLinkActive="active"
+                        class="nav-link">Visa Management</a>
 
                 </li>
                 <li class="nav-item">

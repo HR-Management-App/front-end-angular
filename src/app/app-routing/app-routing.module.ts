@@ -17,6 +17,7 @@ import { EmployeesProfileComponent } from '../hr/employees-profile/employees-pro
 import { UserNavBarComponent } from 'app/user-nav-bar/user-nav-bar.component';
 import { AuthGuardService } from 'app/services/auth-guard.service';
 import { SignOutComponent } from 'app/sign-out/sign-out.component';
+import { UserVisaManagementComponent } from 'app/user-visa-management/user-visa-management.component';
 
 const routes: Routes = [
 
@@ -51,6 +52,14 @@ const routes: Routes = [
   {
     path: 'user-doc-list',
     component: UserDocListComponent,
+    canActivate: [AuthGuardService],
+    data: {
+      allowedRoles: ['user']
+    }
+  },
+  {
+    path: 'user-visa',
+    component: UserVisaManagementComponent,
     canActivate: [AuthGuardService],
     data: {
       allowedRoles: ['user']

@@ -66,7 +66,7 @@ export class UserDocListComponent implements OnInit {
         next: (data) => {
           console.log(JSON.stringify(data));
           let json = JSON.stringify(data);
-          if (JSON.parse(json).status == 'approved') {
+          if (JSON.parse(json).status == 'approved' || JSON.parse(json).status == 'rejected') {
             this.canUpload = true;
           }
         },
