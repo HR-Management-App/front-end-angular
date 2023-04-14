@@ -26,6 +26,7 @@ import { AuthRegistrationTokenComponent } from './auth-registrationToken/auth-re
 import { AuthGuardService } from './services/auth-guard.service';
 import { SignOutComponent } from './sign-out/sign-out.component';
 import { UserVisaManagementComponent } from './user-visa-management/user-visa-management.component';
+import { AdminHousingComponent } from './hr/admin-housing/admin-housing.component';
 
 
 
@@ -49,7 +50,8 @@ import { UserVisaManagementComponent } from './user-visa-management/user-visa-ma
     AuthRegistrationComponent,
     AuthRegistrationTokenComponent,
     SignOutComponent,
-    UserVisaManagementComponent
+    UserVisaManagementComponent,
+    AdminHousingComponent
 
   ],
   imports: [

@@ -13,15 +13,16 @@ export class EmployeesPanelComponent {
   searchType: string = 'email';
   searchTerm: string = '';
 
-  default_url = 'http://localhost:8010/employee-service/employees';
-  url_prefix = 'http://localhost:8010/employee-service/summary?';
+  default_url = 'http://localhost:8082/hr-service/hr-service/employees';
+  url_prefix = 'http://localhost:8082/hr-service/hr-service/summary?';
 
   constructor(private http: HttpClient, private hrService: HrService) { }
 
   ngOnInit() {
-    const token =
-      'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJocjEiLCJ1c2VyX2lkIjoxLCJlbWFpbCI6ImhyMUB0ZXN0LmNvbSIsInBlcm1pc3Npb25zIjpbeyJhdXRob3JpdHkiOiJlbXBsb3llZSJ9LHsiYXV0aG9yaXR5IjoiaHIifV19.rickDdG3Y1ONVgeBV1UGdMbzS2ZjyXt_EpbWSEKtPhA';
+    // const token =
+    //   'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJocjEiLCJ1c2VyX2lkIjoxLCJlbWFpbCI6ImhyMUB0ZXN0LmNvbSIsInBlcm1pc3Npb25zIjpbeyJhdXRob3JpdHkiOiJlbXBsb3llZSJ9LHsiYXV0aG9yaXR5IjoiaHIifV19.rickDdG3Y1ONVgeBV1UGdMbzS2ZjyXt_EpbWSEKtPhA';
     // Add the token to the request headers
+    const token = sessionStorage.getItem('token');
     const authorization = new HttpHeaders().set(
       'Authorization',
       `Bearer ${token}`

@@ -18,6 +18,7 @@ import { UserNavBarComponent } from 'app/user-nav-bar/user-nav-bar.component';
 import { AuthGuardService } from 'app/services/auth-guard.service';
 import { SignOutComponent } from 'app/sign-out/sign-out.component';
 import { UserVisaManagementComponent } from 'app/user-visa-management/user-visa-management.component';
+import { AdminHousingComponent } from 'app/hr/admin-housing/admin-housing.component';
 
 const routes: Routes = [
 
@@ -100,6 +101,12 @@ const routes: Routes = [
   {
     path: 'employees',
     component: EmployeesPanelComponent, data: {
+      allowedRoles: ['hr']
+    }
+  },
+  {
+    path: 'admin-housing',
+    component: AdminHousingComponent, data: {
       allowedRoles: ['hr']
     }
   },
