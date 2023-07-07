@@ -44,7 +44,6 @@ const routes: Routes = [
   {
     path: 'user-home',
     component: UserHomePageComponent,
-    // component: UserNavBarComponent,
     canActivate: [AuthGuardService],
     data: {
       allowedRoles: ['user']
@@ -141,6 +140,7 @@ const routes: Routes = [
 
 ];
 
+
 @NgModule({
   // creates an NgModule containing all directives and given routes
   imports: [RouterModule.forRoot(routes)],
@@ -148,3 +148,6 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class AppRoutingModule { }
+
+
+
